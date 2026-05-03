@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="RPG Tutorial"
-run/main_scene="uid://bms84n1g6hc5l"
+run/main_scene="uid://ctqcvkt7je1qr"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://art/icon.svg"
 
 [input]
 
@@ -29,4 +29,5 @@ increase_experience={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
