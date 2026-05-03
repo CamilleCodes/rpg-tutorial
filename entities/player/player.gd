@@ -19,6 +19,19 @@ const IDLE_ANIMATIONS: Dictionary[Direction, String] = {
 	Direction.RIGHT: "side_idle",
 }
 
+const VELOCITIES: Dictionary[Direction, Vector2] = {
+	Direction.UP: Vector2(0, -SPEED),
+	Direction.DOWN: Vector2(0, SPEED),
+	Direction.LEFT: Vector2(-SPEED, 0),
+	Direction.RIGHT: Vector2(SPEED, 0),
+}
+
+const ACTION_DIRECTIONS: Dictionary[String, Direction] = {
+	"ui_up": Direction.UP,
+	"ui_down": Direction.DOWN,
+	"ui_left": Direction.LEFT,
+	"ui_right": Direction.RIGHT,
+}
 
 func _ready() -> void:
 	play_animation(get_animation_name(IDLE_ANIMATIONS))
@@ -28,41 +41,13 @@ func _physics_process(delta: float) -> void:
 	player_movement(delta)
 
 
-func player_movement(_delta: float) -> void:		
-	if Input.is_action_pressed("ui_right"):
-		current_direction = Direction.RIGHT
-		play_animation(get_animation_name(WALK_ANIMATIONS))
+func player_movement(_delta: float) -> void:
+	for action: String in ACTION_DIRECTIONS:
+		if Input.is_action_pressed(action):
+			move(action)
+			return
 		
-		velocity.x = SPEED
-		velocity.y = 0
-		
-	elif Input.is_action_pressed("ui_left"):
-		current_direction = Direction.LEFT
-		play_animation(get_animation_name(WALK_ANIMATIONS))
-		
-		velocity.x = -SPEED
-		velocity.y = 0
-		
-	elif Input.is_action_pressed("ui_up"):
-		current_direction = Direction.UP
-		play_animation(get_animation_name(WALK_ANIMATIONS))
-
-		velocity.x = 0
-		velocity.y = -SPEED
-		
-	elif Input.is_action_pressed("ui_down"):
-		current_direction = Direction.DOWN
-		play_animation(get_animation_name(WALK_ANIMATIONS))
-
-		velocity.x = 0
-		velocity.y = SPEED
-	
-	else:
-		play_animation(get_animation_name(IDLE_ANIMATIONS))
-		velocity.x = 0
-		velocity.y = 0
-
-	move_and_slide()
+	idle()
 
 
 func play_animation(animation_name: String) -> void:
@@ -73,3 +58,16 @@ func play_animation(animation_name: String) -> void:
 
 func get_animation_name(direction_dict: Dictionary[Direction, String]) -> String:
 	return str(direction_dict.get(current_direction))
+
+
+func idle() -> void:
+	velocity = Vector2.ZERO
+	play_animation(get_animation_name(IDLE_ANIMATIONS))
+	move_and_slide()
+
+
+func move(action: String) -> void:
+	current_direction = ACTION_DIRECTIONS[action]
+	velocity = VELOCITIES[current_direction]
+	play_animation(get_animation_name(WALK_ANIMATIONS))
+	move_and_slide()
