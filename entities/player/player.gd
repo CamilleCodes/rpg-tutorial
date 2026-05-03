@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-const SPEED: float = 300.0
+const SPEED: float = 100.0
 
-enum Direction {	UP, DOWN, LEFT, RIGHT}
+enum Direction {UP, DOWN, LEFT, RIGHT}
 var current_direction: Direction = Direction.DOWN
 
 const WALK_ANIMATIONS: Dictionary[Direction, String] = {
