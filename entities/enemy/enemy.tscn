@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bao2r3latw2lx"]
 
+[ext_resource type="Script" uid="uid://bgxclcw8woyw" path="res://entities/enemy/enemy.gd" id="1_im2q6"]
 [ext_resource type="Texture2D" uid="uid://dlf4570ksdfaq" path="res://art/characters/slime.png" id="1_ksmh7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_im2q6"]
@@ -292,6 +293,7 @@ radius = 31.06445
 radius = 6.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=229573160]
+script = ExtResource("1_im2q6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=67562991]
 sprite_frames = SubResource("SpriteFrames_tir2s")
@@ -307,3 +309,6 @@ shape = SubResource("CircleShape2D_ksmh7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=744278512]
 shape = SubResource("CircleShape2D_im2q6")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
