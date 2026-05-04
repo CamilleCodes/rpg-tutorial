@@ -448,6 +448,16 @@ debug_color = Color(0.53333336, 0.4745098, 0.827451, 0.41960785)
 process_callback = 0
 wait_time = 0.5
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1019621791]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 560
+limit_bottom = 330
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
