@@ -1,6 +1,7 @@
 class_name Player
 extends "res://entities/base.gd"
 
+
 var enemy: Enemy = null
 
 enum State { IDLE, ATTACK }

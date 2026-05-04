@@ -1,6 +1,7 @@
 class_name Enemy
 extends "res://entities/base.gd"
 
+
 var player: Player = null
 
 const SPEED: float = 30.0

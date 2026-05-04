@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
 const WALK_ANIMATIONS: Dictionary[Direction, String] = {
