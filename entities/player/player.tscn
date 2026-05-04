@@ -413,12 +413,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abrql"]
+radius = 3.0
+height = 10.0
+
 [node name="Player" type="CharacterBody2D" unique_id=707987805]
 script = ExtResource("1_abrql")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=664048119]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2002733499]
+position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"back_walk"
+animation = &"front_idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=664048119]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_abrql")

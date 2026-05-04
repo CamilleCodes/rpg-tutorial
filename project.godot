@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RPG Tutorial"
-run/main_scene="uid://ctqcvkt7je1qr"
+run/main_scene="uid://dq3tc7dtath8x"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://art/icon.svg"
 
