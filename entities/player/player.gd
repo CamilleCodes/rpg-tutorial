@@ -1,3 +1,4 @@
+class_name Player
 extends "res://entities/base.gd"
 
 const SPEED: float = 100.0
@@ -76,3 +77,9 @@ func _on_player_hit_box_body_entered(body: Node2D) -> void:
 func _on_player_hit_box_body_exited(body: Node2D) -> void:
 	if body.has_method("is_enemy"):
 		print("The enemy is NOT in attack range")
+
+
+func take_damage(damage_points: int) -> void:
+	health -= damage_points
+	print("Player hit!")
+	print("Player HP: ", health)

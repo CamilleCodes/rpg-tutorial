@@ -1,8 +1,9 @@
+class_name Enemy
 extends "res://entities/base.gd"
 
-const SPEED: float = 30.0
+var player: Player = null
 
-var player: Node2D = null
+const SPEED: float = 30.0
 
 enum State { IDLE, CHASE, ATTACK }
 var state: State = State.IDLE
@@ -64,7 +65,8 @@ func is_enemy() -> void:
 
 func attack() -> void:
 	if state == State.ATTACK:
-		print("Enemy is attacking!! - Player is taking damage")
+		print("Enemy is attacking!!")
+		player.take_damage(10)
 
 
 func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
