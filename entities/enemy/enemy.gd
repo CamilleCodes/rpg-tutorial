@@ -31,8 +31,9 @@ const IDLE_ANIMATIONS: Dictionary[Direction, String] = {
 func _physics_process(_delta: float) -> void:
 	if state == State.CHASE:
 		chase()
-	else:
-		idle()
+		return
+	
+	idle()
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
@@ -45,6 +46,7 @@ func _on_detection_area_body_exited(_body: Node2D) -> void:
 	# The enemy will stop chasing the player when they leave the detection area.
 	player = null
 	state = State.IDLE
+
 
 func get_direction(offset: Vector2) -> Direction:
 	if abs(offset.x) >= abs(offset.y):
