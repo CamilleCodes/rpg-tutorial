@@ -3,10 +3,12 @@ extends "res://entities/base.gd"
 
 var enemy: Enemy = null
 
+enum State { IDLE, ATTACK }
+var state: State = State.IDLE
+
 const SPEED: float = 100.0
 
 @onready var attack_cooldown: Timer = $AttackCooldown
-# TODO: Add attack animations
 
 # TODO: Create a player stats object
 var health: int = 100
@@ -33,7 +35,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	player_movement(delta)
+	if state != State.ATTACK:
+		player_movement(delta)
+
+	attack()
 
 
 func player_movement(_delta: float) -> void:
@@ -73,24 +78,42 @@ func is_player() -> void:
 
 
 func attack() -> void:
-	print("Player is attacking!!!")
-	enemy.take_damage(attack_damage)
-	attack_cooldown.start()
+	if Input.is_action_just_pressed("player_attack"):
+		state = State.ATTACK
+		print("Player is attacking!!!")
+		play_animation(get_animation_name(ATTACK_ANIMATIONS))
+		damage_enemy()
 
 
 func _on_player_hit_box_body_entered(body: Node2D) -> void:
 	if body.has_method("is_enemy"):
 		enemy = body
-		attack()
 
 
 func _on_player_hit_box_body_exited(body: Node2D) -> void:
 	if body.has_method("is_enemy"):
 		enemy = null
-		attack_cooldown.stop()
 
 
 func take_damage(damage_points: int) -> void:
 	health -= damage_points
 	print("Player hit!")
 	print("Player HP: ", health)
+
+
+func _on_attack_cooldown_timeout() -> void:
+	attack_cooldown.stop()
+	state = State.IDLE
+
+
+func damage_enemy() -> void:
+	if not enemy:
+		return
+		
+	enemy.take_damage(attack_damage)
+	attack_cooldown.start()
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if state == State.ATTACK:
+		state = State.IDLE

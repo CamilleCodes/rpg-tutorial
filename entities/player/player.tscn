@@ -222,7 +222,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cs1tg")
 }],
-"loop": true,
+"loop": false,
 "name": &"back_attack",
 "speed": 5.0
 }, {
@@ -299,7 +299,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mx1m4")
 }],
-"loop": true,
+"loop": false,
 "name": &"front_attack",
 "speed": 5.0
 }, {
@@ -362,7 +362,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2gdjj")
 }],
-"loop": true,
+"loop": false,
 "name": &"side_attack",
 "speed": 5.0
 }, {
@@ -428,7 +428,7 @@ script = ExtResource("1_abrql")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2002733499]
 position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"front_idle"
+animation = &"back_attack"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=664048119]
@@ -445,6 +445,10 @@ shape = SubResource("CircleShape2D_abrql")
 debug_color = Color(0.53333336, 0.4745098, 0.827451, 0.41960785)
 
 [node name="AttackCooldown" type="Timer" parent="." unique_id=1974911467]
+process_callback = 0
+wait_time = 0.5
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

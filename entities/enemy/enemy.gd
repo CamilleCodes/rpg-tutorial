@@ -23,12 +23,13 @@ var current_direction: Direction = Direction.DOWN
 
 
 func _physics_process(_delta: float) -> void:
+	if is_dead():
+		# TODO: Add death animation
+		self.queue_free()
+	
 	if state == State.CHASE or state == State.ATTACK:
 		chase()
 		return
-		
-	if health <= 0:
-		self.queue_free()
 	
 	idle()
 
@@ -67,6 +68,10 @@ func idle() -> void:
 
 func is_enemy() -> void:
 	pass
+
+
+func is_dead() -> bool:
+	return health <= 0
 
 
 func attack() -> void:

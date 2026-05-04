@@ -15,3 +15,10 @@ const IDLE_ANIMATIONS: Dictionary[Direction, String] = {
 	Direction.LEFT: "side_idle",
 	Direction.RIGHT: "side_idle",
 }
+
+const ATTACK_ANIMATIONS: Dictionary[Direction, String] = {
+	Direction.UP: "back_attack",
+	Direction.DOWN: "front_attack",
+	Direction.LEFT: "side_attack",
+	Direction.RIGHT: "side_attack",
+}
