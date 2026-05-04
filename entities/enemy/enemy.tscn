@@ -292,6 +292,9 @@ radius = 31.06445
 [sub_resource type="CircleShape2D" id="CircleShape2D_im2q6"]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3fvr7"]
+radius = 13.0
+
 [node name="Enemy" type="CharacterBody2D" unique_id=229573160]
 script = ExtResource("1_im2q6")
 
@@ -310,5 +313,13 @@ shape = SubResource("CircleShape2D_ksmh7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=744278512]
 shape = SubResource("CircleShape2D_im2q6")
 
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1021740787]
+
+[node name="HitBoxCollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1219127055]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_3fvr7")
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="EnemyHitBox" to="." method="_on_enemy_hit_box_body_entered"]
+[connection signal="body_exited" from="EnemyHitBox" to="." method="_on_enemy_hit_box_body_exited"]

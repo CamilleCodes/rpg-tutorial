@@ -417,6 +417,9 @@ animations = [{
 radius = 3.0
 height = 10.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_abrql"]
+radius = 14.3178215
+
 [node name="Player" type="CharacterBody2D" unique_id=707987805]
 y_sort_enabled = true
 collision_layer = 3
@@ -433,3 +436,12 @@ y_sort_enabled = true
 position = Vector2(0, -14)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_abrql")
+
+[node name="PlayerHitBox" type="Area2D" parent="." unique_id=72687984]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox" unique_id=453083345]
+position = Vector2(0, -21)
+shape = SubResource("CircleShape2D_abrql")
+
+[connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
+[connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]

@@ -12,6 +12,9 @@ var state: State = State.IDLE
 var current_direction: Direction = Direction.DOWN
 
 
+# TODO: Add a timer and when the timer runs out, turn the enemy to
+# face the front direction (when the enemy is idle)
+
 func _physics_process(_delta: float) -> void:
 	if state == State.CHASE:
 		chase()
@@ -50,3 +53,21 @@ func chase() -> void:
 
 func idle() -> void:
 	enemy.play(IDLE_ANIMATIONS[current_direction])
+
+
+func is_enemy() -> void:
+	pass
+
+
+func attack() -> void:
+	pass
+
+
+func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
+	if body.has_method("is_player"):
+		print("The player is in attack range")
+
+
+func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
+	if body.has_method("is_player"):
+		print("The player is NOT in attack range")

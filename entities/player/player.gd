@@ -56,3 +56,21 @@ func move(action: String) -> void:
 	velocity = VELOCITIES[current_direction]
 	play_animation(get_animation_name(WALK_ANIMATIONS))
 	move_and_slide()
+
+
+func is_player() -> void:
+	pass
+
+
+func attack() -> void:
+	pass
+
+
+func _on_player_hit_box_body_entered(body: Node2D) -> void:
+	if body.has_method("is_enemy"):
+		print("The enemy is in attack range")
+
+
+func _on_player_hit_box_body_exited(body: Node2D) -> void:
+	if body.has_method("is_enemy"):
+		print("The enemy is NOT in attack range")
