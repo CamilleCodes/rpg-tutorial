@@ -1,8 +1,14 @@
 class_name Player
 extends "res://entities/base.gd"
 
+var enemy: Enemy = null
+
 const SPEED: float = 100.0
 
+@onready var attack_cooldown: Timer = $AttackCooldown
+# TODO: Add attack animations
+
+# TODO: Create a player stats object
 var health: int = 100
 
 var current_direction: Direction = Direction.DOWN
@@ -66,17 +72,21 @@ func is_player() -> void:
 
 
 func attack() -> void:
-	print("Player is attacking!!! - Enemy is taking damage")
+	print("Player is attacking!!!")
+	enemy.take_damage(15)
+	attack_cooldown.start()
 
 
 func _on_player_hit_box_body_entered(body: Node2D) -> void:
 	if body.has_method("is_enemy"):
-		print("The enemy is in attack range")
+		enemy = body
+		attack()
 
 
 func _on_player_hit_box_body_exited(body: Node2D) -> void:
 	if body.has_method("is_enemy"):
-		print("The enemy is NOT in attack range")
+		enemy = null
+		attack_cooldown.stop()
 
 
 func take_damage(damage_points: int) -> void:

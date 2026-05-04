@@ -84,3 +84,9 @@ func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	attack()
+
+
+func take_damage(damage_points: int) -> void:
+	health -= damage_points
+	print("Enemy hit!")
+	print("Enemy HP: ", health)

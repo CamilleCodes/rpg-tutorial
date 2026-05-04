@@ -444,5 +444,7 @@ position = Vector2(0, -21)
 shape = SubResource("CircleShape2D_abrql")
 debug_color = Color(0.53333336, 0.4745098, 0.827451, 0.41960785)
 
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1974911467]
+
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
