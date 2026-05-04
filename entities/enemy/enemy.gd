@@ -4,7 +4,9 @@ extends CharacterBody2D
 const SPEED: float = 30.0
 
 var player: Node2D = null
-var player_chase: bool = false
+
+enum State { IDLE, CHASE }
+var state: State = State.IDLE
 
 @onready var enemy: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -27,7 +29,7 @@ const IDLE_ANIMATIONS: Dictionary[Direction, String] = {
 
 
 func _physics_process(_delta: float) -> void:
-	if player_chase:
+	if state == State.CHASE:
 		var offset: Vector2 = player.position - position
 		position += offset / SPEED
 		
@@ -42,13 +44,13 @@ func _physics_process(_delta: float) -> void:
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	# When the player enters the zone, the enemy will chase it.
 	player = body
-	player_chase = true
+	state = State.CHASE
 
 
 func _on_detection_area_body_exited(_body: Node2D) -> void:
 	# The enemy will stop chasing the player when they leave the detection area.
 	player = null
-	player_chase = false
+	state = State.IDLE
 
 func get_direction(offset: Vector2) -> Direction:
 	if abs(offset.x) >= abs(offset.y):
