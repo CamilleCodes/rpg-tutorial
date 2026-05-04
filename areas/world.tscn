@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dq3tc7dtath8x"]
 
 [ext_resource type="Texture2D" uid="uid://cm7j7cjsvkkcr" path="res://art/tilesets/grass.png" id="1_lqr1n"]
+[ext_resource type="Script" uid="uid://ceard6doq7se4" path="res://areas/world.gd" id="1_ryt38"]
 [ext_resource type="Texture2D" uid="uid://bbux353wvg04c" path="res://art/tilesets/plains.png" id="2_0bt76"]
 [ext_resource type="Texture2D" uid="uid://deyuxqiuhii3l" path="res://art/objects/objects.png" id="3_vpif0"]
 [ext_resource type="PackedScene" uid="uid://ctqcvkt7je1qr" path="res://entities/player/player.tscn" id="4_0bt76"]
@@ -167,8 +168,12 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ryt38")
 sources/1 = SubResource("TileSetAtlasSource_c46fq")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpif0"]
+size = Vector2(33, 49)
+
 [node name="World" type="Node2D" unique_id=307832544]
 y_sort_enabled = true
+script = ExtResource("1_ryt38")
 metadata/_edit_group_ = true
 
 [node name="GroundMapLayer" type="TileMapLayer" parent="." unique_id=935763239]
@@ -185,3 +190,13 @@ position = Vector2(6, 125)
 
 [node name="Enemy" parent="." unique_id=229573160 instance=ExtResource("5_vpif0")]
 position = Vector2(57, 55)
+
+[node name="CliffsTransitionZone" type="Area2D" parent="." unique_id=92479157]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CliffsTransitionZone" unique_id=267655833]
+position = Vector2(591.5, 111.5)
+shape = SubResource("RectangleShape2D_vpif0")
+debug_color = Color(0.7870176, 0.42771947, 0.16673112, 0.41960785)
+
+[connection signal="body_entered" from="CliffsTransitionZone" to="." method="_on_cliffs_transition_zone_body_entered"]
+[connection signal="body_exited" from="CliffsTransitionZone" to="." method="_on_cliffs_transition_zone_body_exited"]

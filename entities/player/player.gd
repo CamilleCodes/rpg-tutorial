@@ -80,24 +80,26 @@ func is_player() -> void:
 func attack() -> void:
 	if Input.is_action_just_pressed("player_attack"):
 		state = State.ATTACK
-		print("Player is attacking!!!")
 		play_animation(get_animation_name(ATTACK_ANIMATIONS))
 		damage_enemy()
 
 
 func _on_player_hit_box_body_entered(body: Node2D) -> void:
-	if body.has_method("is_enemy"):
+	if body is Enemy:
 		enemy = body
 
 
 func _on_player_hit_box_body_exited(body: Node2D) -> void:
-	if body.has_method("is_enemy"):
+	if body is Enemy:
 		enemy = null
 
 
 func take_damage(damage_points: int) -> void:
 	health -= damage_points
-	print("Player hit!")
+	
+	var message: String = "[color=green][b]Player hit with {0} points of damage!![/b][/color]"
+	message = message.format([str(damage_points)])
+	print_rich(message)
 	print("Player HP: ", health)
 
 
@@ -109,7 +111,13 @@ func _on_attack_cooldown_timeout() -> void:
 func damage_enemy() -> void:
 	if not enemy:
 		return
-		
+	
+	print("Player: I stab thee!")
+	
+	var message: String = "[color=white][b]Player attacks for {0} points of damage!![/b][/color]"
+	message = message.format([str(attack_damage)])
+	print_rich(message)
+	
 	enemy.take_damage(attack_damage)
 	attack_cooldown.start()
 

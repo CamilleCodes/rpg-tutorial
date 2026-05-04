@@ -25,6 +25,8 @@ var current_direction: Direction = Direction.DOWN
 func _physics_process(_delta: float) -> void:
 	if is_dead():
 		# TODO: Add death animation
+		print_rich("[color=red][b]Enemy is DEAD!![/b][/color]")
+		print_rich("[color=white][b]Player gains some experience.[/b][/color]")
 		self.queue_free()
 	
 	if state == State.CHASE or state == State.ATTACK:
@@ -66,29 +68,28 @@ func idle() -> void:
 	enemy.play(IDLE_ANIMATIONS[current_direction])
 
 
-func is_enemy() -> void:
-	pass
-
-
 func is_dead() -> bool:
 	return health <= 0
 
 
 func attack() -> void:
 	if state == State.ATTACK:
-		print("Enemy is attacking!!")
+		print("Enemy: How dare thee enter my dungeon!")
+		var message: String = "[color=red][b]Enemy attacks for {0} points of damage!![/b][/color]"
+		message = message.format([str(attack_damage)])
+		print_rich(message)
 		player.take_damage(attack_damage)
 
 
 func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
-	if body.has_method("is_player"):
+	if body is Player:
 		state = State.ATTACK
 		attack()
 		attack_cooldown.start()
 
 
 func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
-	if body.has_method("is_player"):
+	if body is Player:
 		state = State.CHASE
 		attack_cooldown.stop()
 
@@ -99,5 +100,7 @@ func _on_attack_cooldown_timeout() -> void:
 
 func take_damage(damage_points: int) -> void:
 	health -= damage_points
-	print("Enemy hit!")
+	var message: String = "[color=blue][b]Enemy hit with {0} points of damage!![/b][/color]"
+	message = message.format([str(damage_points)])
+	print_rich(message)
 	print("Enemy HP: ", health)
