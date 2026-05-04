@@ -449,11 +449,12 @@ process_callback = 0
 wait_time = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1019621791]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0
 limit_right = 560
 limit_bottom = 330
+limit_smoothed = true
 rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
