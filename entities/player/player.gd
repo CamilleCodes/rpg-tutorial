@@ -10,6 +10,7 @@ const SPEED: float = 100.0
 
 # TODO: Create a player stats object
 var health: int = 100
+var attack_damage: int = 20
 
 var current_direction: Direction = Direction.DOWN
 
@@ -73,7 +74,7 @@ func is_player() -> void:
 
 func attack() -> void:
 	print("Player is attacking!!!")
-	enemy.take_damage(15)
+	enemy.take_damage(attack_damage)
 	attack_cooldown.start()
 
 

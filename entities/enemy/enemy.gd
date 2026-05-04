@@ -7,22 +7,28 @@ const SPEED: float = 30.0
 
 enum State { IDLE, CHASE, ATTACK }
 var state: State = State.IDLE
-var health: int = 100
+# TODO: Add a timer and when the timer runs out, turn the enemy to
+# face the front direction (when the enemy is idle)
 
 @onready var enemy: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_cooldown: Timer = $AttackCooldown
 # TODO: Add attack animations
+# TODO: Add death animation and check for 0 or less HP
+# TODO: Some enemies might want to run away once they hit low enough HP
+# TODO: Create enemy stats object
+var health: int = 100
+var attack_damage: int = 10
 
 var current_direction: Direction = Direction.DOWN
 
-
-# TODO: Add a timer and when the timer runs out, turn the enemy to
-# face the front direction (when the enemy is idle)
 
 func _physics_process(_delta: float) -> void:
 	if state == State.CHASE or state == State.ATTACK:
 		chase()
 		return
+		
+	if health <= 0:
+		self.queue_free()
 	
 	idle()
 
@@ -66,7 +72,7 @@ func is_enemy() -> void:
 func attack() -> void:
 	if state == State.ATTACK:
 		print("Enemy is attacking!!")
-		player.take_damage(10)
+		player.take_damage(attack_damage)
 
 
 func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
