@@ -83,26 +83,33 @@ sources/2 = SubResource("TileSetAtlasSource_vpif0")
 texture = ExtResource("3_vpif0")
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
+0:5/0/y_sort_origin = 20
 0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.303429, 13.14352, 9.200462, 12.442532, 11.653915, 20.328644, 9.200462, 26.287037, -9.901455, 25.235558, -12.880653, 19.802902)
 6:7/size_in_atlas = Vector2i(2, 2)
 6:7/0 = 0
+6:7/0/y_sort_origin = 5
 6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.303429, 13.14352, 9.200462, 12.442532, 11.653915, 20.328644, 9.200462, 26.287037, -9.901455, 25.235558, -12.880653, 19.802902)
 6:7/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:6/size_in_atlas = Vector2i(2, 3)
 8:6/0 = 0
+8:6/0/y_sort_origin = 16
 8:6/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:7/size_in_atlas = Vector2i(2, 2)
 10:7/0 = 0
+10:7/0/y_sort_origin = 5
 10:7/0/physics_layer_3/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:2/size_in_atlas = Vector2i(1, 2)
 11:2/0 = 0
 10:0/size_in_atlas = Vector2i(2, 1)
 10:0/0 = 0
 5:0/0 = 0
+5:0/0/y_sort_origin = 5
 5:0/0/physics_layer_5/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:0/0 = 0
+0:0/0/y_sort_origin = 5
 0:0/0/physics_layer_6/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:1/0 = 0
+0:1/0/y_sort_origin = 5
 0:1/0/physics_layer_4/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c46fq"]
@@ -144,6 +151,7 @@ texture = ExtResource("2_0bt76")
 0:4/0/physics_layer_8/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:7/size_in_atlas = Vector2i(3, 1)
 1:7/0 = 0
+1:7/0/physics_layer_1/polygon_0/points = PackedVector2Array(-14.59104, -9.793308, -6.3804874, -13.453433, 5.0944977, -13.552355, 12.019058, -8.309474, 15.085651, 1.582756, 12.414749, 10.287918, -12.216904, 12.06852, -15.580261, 3.4622803)
 1:7/0/physics_layer_9/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_c46fq"]
@@ -161,6 +169,7 @@ sources/0 = SubResource("TileSetAtlasSource_ryt38")
 sources/1 = SubResource("TileSetAtlasSource_c46fq")
 
 [node name="World" type="Node2D" unique_id=307832544]
+y_sort_enabled = true
 metadata/_edit_group_ = true
 
 [node name="GroundMapLayer" type="TileMapLayer" parent="." unique_id=935763239]
@@ -169,8 +178,9 @@ tile_set = SubResource("TileSet_ryt38")
 
 [node name="FoliageMapLayer" type="TileMapLayer" parent="." unique_id=566445525]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAANAAEAAAAAAAUAAAAOAAQAAAAAAAUAAAAPABEAAAAAAAUAAAARAA4AAAAAAAUAAAAjAAkAAAAAAAUAAAAjAAwAAAAAAAUAAAAjAA8AAAAAAAUAAAAjABIAAAAAAAUAAAAiAP//AAAAAAUAAAAiAAIAAAAAAAUAAAADABAAAAAGAAcAAAAVAAwAAAAIAAYAAAAXABAAAAAIAAYAAAAdAAwAAAAIAAYAAAAcABAAAAAIAAYAAAAfABAAAAAKAAcAAAACAAwAAAAKAAcAAAAKABEAAAAKAAcAAAAVAAEAAAAAAAUAAAAVAAQAAAAAAAUAAAASAAQAAAAAAAUAAAASAAEAAAAAAAUAAAAfAAQAAAAGAAcAAAAdAAMAAAAGAAcAAAACAAEAAAAGAAcAAAABAAgAAAAGAAcAAAAGAAIAAQABAAcAAAAHAAIAAQACAAcAAAAIAAIAAQADAAcAAAAJAAIAAQAAAAcAAAAKAAIAAQAAAAcAAAABAAQAAAAFAAAAAAAKAAYAAAAAAAAAAAAIAAkAAAAAAAAAAAARAAsAAAAAAAAAAAAhAAQAAAAAAAAAAAAMAAUAAAAAAAEAAAAPAA4AAAAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAANAAEAAAAAAAUAAAAOAAQAAAAAAAUAAAAPABEAAAAAAAUAAAARAA4AAAAAAAUAAAAjAAkAAAAAAAUAAAAjAAwAAAAAAAUAAAAjAA8AAAAAAAUAAAAjABIAAAAAAAUAAAAiAP//AAAAAAUAAAAiAAIAAAAAAAUAAAADABAAAAAGAAcAAAAVAAwAAAAIAAYAAAAXABAAAAAIAAYAAAAdAAwAAAAIAAYAAAAcABAAAAAIAAYAAAAfABAAAAAKAAcAAAACAAwAAAAKAAcAAAAKABEAAAAKAAcAAAAVAAEAAAAAAAUAAAAVAAQAAAAAAAUAAAASAAQAAAAAAAUAAAASAAEAAAAAAAUAAAAfAAQAAAAGAAcAAAAdAAMAAAAGAAcAAAACAAEAAAAGAAcAAAABAAgAAAAGAAcAAAAGAAIAAQABAAcAAAAJAAIAAQAAAAcAAAAKAAIAAQAAAAcAAAABAAQAAAAFAAAAAAAKAAYAAAAAAAAAAAAIAAkAAAAAAAAAAAARAAsAAAAAAAAAAAAhAAQAAAAAAAAAAAAMAAUAAAAAAAEAAAAPAA4AAAAAAAEAAAA=")
 tile_set = SubResource("TileSet_c46fq")
 
 [node name="Player" parent="." unique_id=707987805 instance=ExtResource("4_0bt76")]
+y_sort_enabled = true
 position = Vector2(6, 100)
