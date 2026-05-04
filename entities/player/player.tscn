@@ -459,7 +459,21 @@ rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=870962043]
+modulate = Color(0.011730017, 0.46471667, 2.5027991e-06, 1)
+offset_left = -9.000001
+offset_top = -10.0
+offset_right = 170.99998
+offset_bottom = 10.0
+scale = Vector2(0.1, 0.1)
+show_percentage = false
+
+[node name="RegenerationTimer" type="Timer" parent="." unique_id=37894954]
+wait_time = 5.0
+autostart = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="RegenerationTimer" to="." method="_on_regeneration_timer_timeout"]

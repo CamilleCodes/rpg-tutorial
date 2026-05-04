@@ -7,12 +7,15 @@ var enemy: Enemy = null
 enum State { IDLE, ATTACK }
 var state: State = State.IDLE
 
+# TODO: Add key binding to run instead of walk
 const SPEED: float = 100.0
 
 @onready var attack_cooldown: Timer = $AttackCooldown
 
 # TODO: Create a player stats object
-var health: int = 100
+var max_health: int = 100
+var current_health: int = 100
+var health_regen_rate: int = 20
 var attack_damage: int = 20
 
 var current_direction: Direction = Direction.DOWN
@@ -40,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		player_movement(delta)
 
 	attack()
+	update_health_bar()
 
 
 func player_movement(_delta: float) -> void:
@@ -96,12 +100,12 @@ func _on_player_hit_box_body_exited(body: Node2D) -> void:
 
 
 func take_damage(damage_points: int) -> void:
-	health -= damage_points
+	current_health -= damage_points
 	
 	var message: String = "[color=green][b]Player hit with {0} points of damage!![/b][/color]"
 	message = message.format([str(damage_points)])
 	print_rich(message)
-	print("Player HP: ", health)
+	print("Player HP: ", current_health)
 
 
 func _on_attack_cooldown_timeout() -> void:
@@ -126,3 +130,13 @@ func damage_enemy() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if state == State.ATTACK:
 		state = State.IDLE
+
+
+func update_health_bar() -> void:
+	# TODO: Move health bar to HUD scene
+	var health_bar: ProgressBar = $HealthBar
+	health_bar.value = current_health
+	
+	
+func _on_regeneration_timer_timeout() -> void:
+	current_health = mini(current_health + health_regen_rate, max_health)
