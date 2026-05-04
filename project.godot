@@ -39,6 +39,10 @@ increase_experience={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player Collision"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
