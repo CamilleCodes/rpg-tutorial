@@ -4,10 +4,13 @@ const SPEED: float = 30.0
 
 var player: Node2D = null
 
-enum State { IDLE, CHASE }
+enum State { IDLE, CHASE, ATTACK }
 var state: State = State.IDLE
+var health: int = 100
 
 @onready var enemy: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_cooldown: Timer = $AttackCooldown
+# TODO: Add attack animations
 
 var current_direction: Direction = Direction.DOWN
 
@@ -16,7 +19,7 @@ var current_direction: Direction = Direction.DOWN
 # face the front direction (when the enemy is idle)
 
 func _physics_process(_delta: float) -> void:
-	if state == State.CHASE:
+	if state == State.CHASE or state == State.ATTACK:
 		chase()
 		return
 	
@@ -60,14 +63,22 @@ func is_enemy() -> void:
 
 
 func attack() -> void:
-	pass
+	if state == State.ATTACK:
+		print("Enemy is attacking!! - Player is taking damage")
 
 
 func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
 	if body.has_method("is_player"):
-		print("The player is in attack range")
+		state = State.ATTACK
+		attack()
+		attack_cooldown.start()
 
 
 func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
 	if body.has_method("is_player"):
-		print("The player is NOT in attack range")
+		state = State.CHASE
+		attack_cooldown.stop()
+
+
+func _on_attack_cooldown_timeout() -> void:
+	attack()

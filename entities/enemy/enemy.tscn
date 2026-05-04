@@ -318,8 +318,14 @@ shape = SubResource("CircleShape2D_im2q6")
 [node name="HitBoxCollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1219127055]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_3fvr7")
+debug_color = Color(0.5344104, 0.47468126, 0.8267484, 0.41960785)
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=2002495106]
+process_callback = 0
+wait_time = 3.0
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="EnemyHitBox" to="." method="_on_enemy_hit_box_body_entered"]
 [connection signal="body_exited" from="EnemyHitBox" to="." method="_on_enemy_hit_box_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

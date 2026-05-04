@@ -2,6 +2,8 @@ extends "res://entities/base.gd"
 
 const SPEED: float = 100.0
 
+var health: int = 100
+
 var current_direction: Direction = Direction.DOWN
 
 const VELOCITIES: Dictionary[Direction, Vector2] = {
@@ -63,7 +65,7 @@ func is_player() -> void:
 
 
 func attack() -> void:
-	pass
+	print("Player is attacking!!! - Enemy is taking damage")
 
 
 func _on_player_hit_box_body_entered(body: Node2D) -> void:
