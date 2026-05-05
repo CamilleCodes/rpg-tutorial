@@ -10,11 +10,6 @@ func _ready() -> void:
 		GameState.location = GameState.Location.WORLD
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
-
 func _on_cliffs_transition_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
 		get_tree().call_deferred("change_scene_to_file", "res://areas/cliffs.tscn")

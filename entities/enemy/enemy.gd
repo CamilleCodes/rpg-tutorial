@@ -100,6 +100,7 @@ func _on_attack_cooldown_timeout() -> void:
 
 
 func take_damage(damage_points: int) -> void:
+	# TODO: Add damaged animation
 	health -= damage_points
 	var message: String = "[color=blue][b]Enemy hit with {0} points of damage!![/b][/color]"
 	message = message.format([str(damage_points)])
